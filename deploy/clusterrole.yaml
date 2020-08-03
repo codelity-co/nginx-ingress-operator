@@ -1,0 +1,155 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: nginx-ingress-operator
+rules:
+
+# Copy from role
+
+- apiGroups: [""]
+  resources: ["pods", "pods/exec", "pods/log"]
+  verbs: ["get", "watch", "list", "create", "update", "delete", "patch"]
+
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "watch", "list", "create", "update", "delete", "patch"]
+
+- apiGroups: [""]
+  resources: ["serviceaccounts"]
+  verbs: ["get", "watch", "list", "create", "update", "delete", "patch"]
+
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "watch", "list", "create", "update", "delete", "patch"]
+
+- apiGroups: [""]
+  resources: ["persistentvolumeclaims"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]  
+
+- apiGroups: [""]
+  resources: ["events"]
+  verbs: ["create", "patch"]
+  
+# - apiGroups: [""]
+#   resources: ["namespaces"]
+#   verbs: ["get"]
+
+- apiGroups: ["apps"]
+  resources: ["daemonsets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["apps"]
+  resourceNames: ["nginx-ingress-operator"]
+  resources: ["daemonsets/finalizers", "deployments/finalizers", "replicasets/finalizers", "statefulsets/finalizers"]
+  verbs: ["update"]
+
+- apiGroups: ["apps"]
+  resources: ["replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["apps"]
+  resources: ["statefulsets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+  
+- apiGroups: ["policy"]
+  resources: ["poddisruptionbudgets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["monitoring.coreos.com"]
+  resources: ["servicemonitors"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["rbac.authorization.k8s.io"]
+  resources: ["roles", "rolebindings"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["helm.operator-sdk"]
+  resources: ["nginxingresses", "nginxingresses/status", "nginxingresses/finalizers"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["monitoring.coreos.com"]
+  resources: ["servicemonitors"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+# Cluster role
+
+- apiGroups: [""]
+  resources: ["endpoints"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["list", "get", "watch"]
+
+- apiGroups: ["extensions"]
+  resources: ["ingresses"]
+  verbs: ["get", "list", "watch"]
+
+- apiGroups: ["extensions"]
+  resources: ["ingresses/status"]
+  verbs: ["update"]
+
+- apiGroups: ["apiextensions.k8s.io"]
+  resources: ["customresourcedefinitions"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["apiregistration.k8s.io"]
+  resources: ["apiservices"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["auditregistration.k8s.io"]
+  resources: ["auditsinks"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["rbac.authorization.k8s.io"]
+  resources: ["clusterroles", "clusterrolebindings"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["transportservers"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["transportservers/status"]
+  verbs: ["update"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["transportservers/finalizers"]
+  verbs: ["update"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["virtualserverroutes"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["virtualserverroutes/status"]
+  verbs: ["update"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["virtualserverroutes/finalizers"]
+  verbs: ["update"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["virtualservers"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["virtualservers/status"]
+  verbs: ["update"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["virtualservers/finalizers"]
+  verbs: ["update"]
+
+- apiGroups: ["k8s.nginx.org"]
+  resources: ["policies"]
+  verbs: ["get", "list", "watch"]
