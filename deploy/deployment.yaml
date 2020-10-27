@@ -16,7 +16,7 @@ spec:
       containers:
         - name: nginx-ingress-operator
           # Replace this with the built image name
-          image: gcr.io/codelity-co/nginx-ingress-operator:v0.3.0
+          image: gcr.io/codelity-co/nginx-ingress-operator:v0.4.0
           imagePullPolicy: IfNotPresent
           env:
             - name: WATCH_NAMESPACE
